@@ -1,0 +1,13 @@
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.env
+.streamlit/secrets.toml
+.DS_Store
+*.log
+.pytest_cache/
+.ruff_cache/
+data/
+models/*.pt
+!models/.gitkeep
