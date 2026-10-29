@@ -39,6 +39,7 @@ with st.sidebar:
         "Add PDF documents",
         type=["pdf"],
         accept_multiple_files=True,
+        max_upload_size=25,
         help="Selectable text PDFs up to 25 MB each. Scanned PDFs need OCR first.",
     )
     if st.button("Index documents", type="primary", disabled=not uploads):
