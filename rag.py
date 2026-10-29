@@ -86,6 +86,8 @@ def build_index(uploads: Iterable[BinaryIO]) -> tuple[LocalIndex, list[str]]:
         filename = getattr(upload, "name", "uploaded.pdf")
         filenames.add(filename)
         try:
+            if hasattr(upload, "seek"):
+                upload.seek(0)
             reader = PdfReader(upload, strict=False)
             for page_number, page in enumerate(reader.pages, start=1):
                 text = (page.extract_text() or "").strip()
