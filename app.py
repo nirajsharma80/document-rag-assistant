@@ -25,8 +25,10 @@ with st.sidebar:
     st.header("Workspace")
     provider = st.selectbox("Answer model", ["Google Gemini", "OpenAI"])
     secret_name = "GOOGLE_API_KEY" if provider == "Google Gemini" else "OPENAI_API_KEY"
-    default_model = "gemini-2.5-flash" if provider == "Google Gemini" else "gpt-4o-mini"
-    model = st.text_input("Model", value=default_model)
+    if provider == "Google Gemini":
+        model = st.selectbox("Model", ["gemini-3.8-flash", "gemini-3.5-flash-lite"])
+    else:
+        model = st.text_input("Model", value="gpt-4o-mini")
     configured_key = _configured_secret(secret_name)
     session_key = st.text_input(
         f"{secret_name} (optional session key)",
@@ -97,3 +99,4 @@ if question:
                     st.session_state.messages.append(
                         {"role": "assistant", "content": response, "sources": sources}
                     )
+
