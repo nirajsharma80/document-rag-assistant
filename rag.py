@@ -127,8 +127,12 @@ def answer_question(
         from google import genai
 
         client = genai.Client(api_key=api_key)
-        response = client.models.generate_content(model=model_name, contents=prompt)
-        answer = response.text
+        interaction = client.interactions.create(
+            model=model_name,
+            input=prompt,
+            store=False,
+        )
+        answer = interaction.output_text
     elif provider == "OpenAI":
         from openai import OpenAI
 
